@@ -14,67 +14,14 @@ int Anda(int anda);
 void Limite(void);
 int Movimenta(int aa, int fx, int fy, int kreturn);
 void teste();
+void teste1();
 
 
 int main()
 {
-
-	int comida = 1;
-	int cx = 10;
-	int cy = 60;
-	int range = 10;
-	int opc;
-	x = 1;
-	y = 1;
-
-	opc = 1;
-
-	printf("Comida Local (%d,%d)\n", cx, cy);
-
-	if ((range >= cx) and(range >= cy))
-	{
-		printf(" Comida proximo ( < 10)\n");
-	}
-
-
-	while (opc != 'n')
-	{
-		if (x < cx)
-		{
-			x = Movimenta(Anda(DIREITA), x, y, RETX);
-			printf("opc = ");
-			opc = getchar();
-		}
-
-		if (x > cx)
-		{
-			x = Movimenta(Anda(ESQUERDA), x, y, RETX);
-			printf("opc = ");
-			opc = getchar();
-		}
-
-		if (y < cy)
-		{
-			y = Movimenta(Anda(FRENTE), x, y, RETY);
-			printf("opc = ");
-			opc = getchar();
-		}
-
-		if (y > cy)
-		{
-			y = Movimenta(Anda(TRAS), x, y, RETY);
-			printf("opc = ");
-			opc = getchar();
-		}
-		if ((x == cx) && (y == cy))
-		{
-			printf(" Comida achado\n");
-			break;
-		}
-	}
-
+	teste1();	
 	printf(" Fim do Programa");
-
+	
 	return 0;
 }
 
@@ -159,6 +106,11 @@ int Movimenta(int aa, int fx, int fy, int kreturn)
 
 }
 
+void DetectaComida()
+{
+	
+}
+
 void teste()
 {
 	printf(" Nascimento\n");
@@ -205,4 +157,62 @@ void teste()
 	Limite();
 
 
+}
+
+void teste1()
+{
+	int comida = 1;
+	int cx = 10;
+	int cy = 60;
+	int range = 10;
+	char opc;
+	x = 1;
+	y = 1;
+
+	opc = 1;
+
+	printf("Comida Local (%d,%d)\n", cx, cy);
+
+	if ((range >= cx)&&(range >= cy))
+	{
+		printf(" Comida proximo ( < 10)\n");
+	}
+
+
+	while (opc != 'n')
+	{
+		if (x < cx)
+		{
+			x = Movimenta(Anda(DIREITA), x, y, RETX);
+			printf("opc = ");
+			opc = getchar();
+		}
+
+		if (x > cx)
+		{
+			x = Movimenta(Anda(ESQUERDA), x, y, RETX);
+			printf("opc = ");
+			opc = getchar();
+		}
+
+		if (y < cy)
+		{
+			y = Movimenta(Anda(FRENTE), x, y, RETY);
+			printf("opc = ");
+			opc = getchar();
+		}
+
+		if (y > cy)
+		{
+			y = Movimenta(Anda(TRAS), x, y, RETY);
+			printf("opc = ");
+			opc = getchar();
+		}
+		if ((x == cx) && (y == cy))
+		{
+			printf(" Comida achado\n");
+			break;
+		}
+	}
+	
 }
