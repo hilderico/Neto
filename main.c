@@ -31,7 +31,7 @@ int main()
 
 	printf("Comida Local (%d,%d)\n", cx, cy);
 
-	if ((range >= cx) and (range >= cy))
+	if ((range >= cx) and(range >= cy))
 	{
 		printf(" Comida proximo ( < 10)\n");
 	}
@@ -66,7 +66,7 @@ int main()
 			printf("opc = ");
 			opc = getchar();
 		}
-		if((x == cx) && (y == cy))
+		if ((x == cx) && (y == cy))
 		{
 			printf(" Comida achado\n");
 			break;
