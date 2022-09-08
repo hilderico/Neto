@@ -7,9 +7,12 @@ const int FRENTE = 0;
 const int DIREITA = 1;
 const int TRAS = 2;
 const int ESQUERDA = 3;
+const int RETX = 4;
+const int RETY = 5;
 
 int Anda(int anda);
 void Limite(void);
+int Movimenta(int aa, int fx, int fy, int kreturn);
 void teste();
 
 
@@ -17,20 +20,62 @@ int main()
 {
 
 	int comida = 1;
-	int cx = 1;
-	int cy = 6;
-	x = 1 ;
+	int cx = 10;
+	int cy = 60;
+	int range = 10;
+	int opc;
+	x = 1;
 	y = 1;
+
+	opc = 1;
 
 	printf("Comida Local (%d,%d)\n", cx, cy);
 
+	if ((range >= cx) and (range >= cy))
+	{
+		printf(" Comida proximo ( < 10)\n");
+	}
 
 
+	while (opc != 'n')
+	{
+		if (x < cx)
+		{
+			x = Movimenta(Anda(DIREITA), x, y, RETX);
+			printf("opc = ");
+			opc = getchar();
+		}
 
+		if (x > cx)
+		{
+			x = Movimenta(Anda(ESQUERDA), x, y, RETX);
+			printf("opc = ");
+			opc = getchar();
+		}
 
+		if (y < cy)
+		{
+			y = Movimenta(Anda(FRENTE), x, y, RETY);
+			printf("opc = ");
+			opc = getchar();
+		}
+
+		if (y > cy)
+		{
+			y = Movimenta(Anda(TRAS), x, y, RETY);
+			printf("opc = ");
+			opc = getchar();
+		}
+		if((x == cx) && (y == cy))
+		{
+			printf(" Comida achado\n");
+			break;
+		}
+	}
+
+	printf(" Fim do Programa");
 
 	return 0;
-
 }
 
 int Anda(int anda)
@@ -66,6 +111,52 @@ int Anda(int anda)
 void Limite(void)
 {
 	printf("\n\n");
+}
+
+int Movimenta(int aa, int fx, int fy, int kreturn)
+{
+
+	if (aa == FRENTE)
+	{
+		fy++;
+		printf("Ponto Local (%d,%d)\n", x, y);
+		if (kreturn == RETY)
+		{
+			return fy;
+		}
+
+	}
+
+	if (aa == DIREITA)
+	{
+		fx++;
+		printf("Ponto Local (%d,%d)\n", x, y);
+		if (kreturn == RETX)
+		{
+			return fx;
+		}
+	}
+
+	if (aa == TRAS)
+	{
+		fy--;
+		printf("Ponto Local (%d,%d)\n", x, y);
+		if (kreturn == RETY)
+		{
+			return fy;
+		}
+	}
+
+	if (aa == ESQUERDA)
+	{
+		fx--;
+		printf("Ponto Local (%d,%d)\n", x, y);
+		if (kreturn == RETX)
+		{
+			return fx;
+		}
+	}
+
 }
 
 void teste()
