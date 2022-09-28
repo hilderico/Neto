@@ -16,20 +16,15 @@ int Anda(int anda);
 void Limite(void);
 int Movimenta(int aa, int fx, int fy, int kreturn);
 int DetectaComida(int x, int y, int cx, int cy);
+
 void teste();
 void teste1();
+void teste2();
 
 
 int main()
 {
-	printf("Teste 1\n");
-	DetectaComida(1,1,-15,15);
-	DetectaComida(1,1,-9,9);
-	DetectaComida(1,1,9,9);
-	DetectaComida(1,1,-39,-1);
-	DetectaComida(-32,10,-39,15);
-	DetectaComida(1,1,-15,15);
-	DetectaComida(1,1,-15,15);
+	
 	
 	printf(" Fim do Programa");
 
@@ -454,4 +449,17 @@ void teste1()
 		printf("opc = %c\n", opc);
 	}
 
+}
+
+void teste2()
+{
+	printf("Teste 1\n");
+	DetectaComida(1,1,-15,15);
+	DetectaComida(1,1,-9,9);
+	DetectaComida(1,1,9,9);
+	DetectaComida(1,1,-39,-1);
+	DetectaComida(-32,10,-39,15);
+	DetectaComida(1,1,-15,15);
+	DetectaComida(1,1,-15,15);
+	
 }
