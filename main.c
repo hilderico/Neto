@@ -9,19 +9,30 @@ const int TRAS = 2;
 const int ESQUERDA = 3;
 const int RETX = 4;
 const int RETY = 5;
+const int COMIDASIM = 6;
+const int COMIDANAO = 7;
 
 int Anda(int anda);
 void Limite(void);
 int Movimenta(int aa, int fx, int fy, int kreturn);
+int DetectaComida(int x, int y, int cx, int cy);
 void teste();
 void teste1();
 
 
 int main()
 {
-	teste1();	
-	printf(" Fim do Programa");
+	printf("Teste 1\n");
+	DetectaComida(1,1,-15,15);
+	DetectaComida(1,1,-9,9);
+	DetectaComida(1,1,9,9);
+	DetectaComida(1,1,-39,-1);
+	DetectaComida(-32,10,-39,15);
+	DetectaComida(1,1,-15,15);
+	DetectaComida(1,1,-15,15);
 	
+	printf(" Fim do Programa");
+
 	return 0;
 }
 
@@ -106,9 +117,243 @@ int Movimenta(int aa, int fx, int fy, int kreturn)
 
 }
 
-void DetectaComida()
+int DetectaComida(int x, int y, int cx, int cy)
 {
+	int range = 10;
+	int z = 0;
+	int z1 = 0;
+
+	/* 
+
+	   -1 + 1 (-1 -1)
+	   x- cx
+
+	   se resultado for < 0 multiplica (-1)
+
+	   -2 -1 (-2 +1)
+	   x - cx
+
+	   se resultado for < 0 multiplica (-1)
+
+	   -1 - 2
+x - cx
+	   ordena maior > menor
+
+	   (-2+1)(*-1)
+
+	   -5 +1 (-5-1)*(-1)
+	   x - cx
+
+	   +2+3
+x - cx
+	   ordena maior > menor
+
+	   (3-2)
+	   
+
+	   se resultado for < 0 multiplica por (-1)
+
+
+
+	 */
+
+	if (cx < 0)
+	{
+		if (x < 0)
+		{
+			if (x < cx)
+			{
+				z = (cx - x);
+				if (z < 0)
+				{
+					z = z * (-1);
+				}
+
+			}
+			else
+			{
+				z = x - cx;
+				if (z < 0)
+				{
+					z = z * (-1);
+				}
+
+			}
+		}
+		else
+		{
+			if (x < cx)
+			{
+				z = (cx - x);
+				if (z < 0)
+				{
+					z = z * (-1);
+				}
+
+			}
+			else
+			{
+				z = x - cx;
+				if (z < 0)
+				{
+					z = z * (-1);
+				}
+
+			}
+		}
+	}
+	else
+	{
+		if (x < 0)
+		{
+			if (x < cx)
+			{
+				z = (cx - x);
+				if (z < 0)
+				{
+					z = z * (-1);
+				}
+
+			}
+			else
+			{
+				z = x - cx;
+				if (z < 0)
+				{
+					z = z * (-1);
+				}
+
+			}
+		}
+		else
+		{
+			if (x < cx)
+			{
+				z = (cx - x);
+				if (z < 0)
+				{
+					z = z * (-1);
+				}
+
+			}
+			else
+			{
+				z = x - cx;
+				if (z < 0)
+				{
+					z = z * (-1);
+				}
+
+			}
+		}
+		
+	}
 	
+	//=====================
+	
+	if (cy < 0)
+	{
+		if (y < 0)
+		{
+			if (y < cy)
+			{
+				z1 = (cy - y);
+				if (z1 < 0)
+				{
+					z1 = z1 * (-1);
+				}
+
+			}
+			else
+			{
+				z1 = y - cy;
+				if (z1 < 0)
+				{
+					z1 = z1 * (-1);
+				}
+
+			}
+		}
+		else
+		{
+			if (y < cy)
+			{
+				z1 = (cy - y);
+				if (z1 < 0)
+				{
+					z1 = z1 * (-1);
+				}
+
+			}
+			else
+			{
+				z1 = y - cy;
+				if (z1 < 0)
+				{
+					z1 = z1 * (-1);
+				}
+
+			}
+		}
+	}
+	else
+	{
+		if (y < 0)
+		{
+			if (y < cy)
+			{
+				z1 = (cy - y);
+				if (z1 < 0)
+				{
+					z1 = z1 * (-1);
+				}
+
+			}
+			else
+			{
+				z1 = y - cy;
+				if (z1 < 0)
+				{
+					z1 = z1 * (-1);
+				}
+
+			}
+		}
+		else
+		{
+			if (y < cy)
+			{
+				z1 = (cy - y);
+				if (z1 < 0)
+				{
+					z1= z1 * (-1);
+				}
+
+			}
+			else
+			{
+				z1 = y - cy;
+				if (z1 < 0)
+				{
+					z1 = z1 * (-1);
+				}
+
+			}
+		}
+		
+	}
+
+
+	if (( z <= range)&& (z1 <= range))
+	{
+		printf(" Comida proximo ( < 10)\n");
+		return COMIDASIM;
+	}
+	else
+	{
+		printf(" Não Há comida\n");
+		return COMIDANAO;
+	}
 }
 
 void teste()
@@ -156,7 +401,6 @@ void teste()
 
 	Limite();
 
-
 }
 
 void teste1()
@@ -173,46 +417,41 @@ void teste1()
 
 	printf("Comida Local (%d,%d)\n", cx, cy);
 
-	if ((range >= cx)&&(range >= cy))
+	if ((range >= cx) && (range >= cy))
 	{
 		printf(" Comida proximo ( < 10)\n");
 	}
-
 
 	while (opc != 'n')
 	{
 		if (x < cx)
 		{
 			x = Movimenta(Anda(DIREITA), x, y, RETX);
-			printf("opc = ");
-			opc = getchar();
 		}
 
 		if (x > cx)
 		{
 			x = Movimenta(Anda(ESQUERDA), x, y, RETX);
-			printf("opc = ");
-			opc = getchar();
 		}
 
 		if (y < cy)
 		{
 			y = Movimenta(Anda(FRENTE), x, y, RETY);
-			printf("opc = ");
-			opc = getchar();
 		}
 
 		if (y > cy)
 		{
 			y = Movimenta(Anda(TRAS), x, y, RETY);
-			printf("opc = ");
-			opc = getchar();
 		}
 		if ((x == cx) && (y == cy))
 		{
 			printf(" Comida achado\n");
 			break;
 		}
+
+		printf("opc = ");
+		opc = getchar();
+		printf("opc = %c\n", opc);
 	}
-	
+
 }
