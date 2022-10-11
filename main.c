@@ -16,14 +16,45 @@ int Anda(int anda);
 void Limite(void);
 int Movimenta(int aa, int fx, int fy, int kreturn);
 int DetectaComida(int x, int y, int cx, int cy);
+void Destino(int fx,int fy, int rotax, int rotay);
 
 void teste();
 void teste1();
 void teste2();
+void teste3();
 
 
 int main()
 {
+	int x = 1;
+	int y = 1;
+	int rotax = 10;
+	int rotay = 60;
+
+	while ((x != rotax) || (y != rotay))
+	{
+		if (x < rotax)
+		{
+			x = Movimenta(Anda(DIREITA), x, y, RETX);
+		}
+
+		if (x > rotax)
+		{
+			x = Movimenta(Anda(ESQUERDA), x, y, RETX);
+		}
+
+		if (y < rotay)
+		{
+			y = Movimenta(Anda(FRENTE), x, y, RETY);
+		}
+
+		if (y > rotay)
+		{
+			y = Movimenta(Anda(TRAS), x, y, RETY);
+		}
+
+	}
+
 	
 	
 	printf(" Fim do Programa");
@@ -72,7 +103,7 @@ int Movimenta(int aa, int fx, int fy, int kreturn)
 	if (aa == FRENTE)
 	{
 		fy++;
-		printf("Ponto Local (%d,%d)\n", x, y);
+		printf("Ponto Local (%d,%d)\n", fx, fy);
 		if (kreturn == RETY)
 		{
 			return fy;
@@ -83,7 +114,7 @@ int Movimenta(int aa, int fx, int fy, int kreturn)
 	if (aa == DIREITA)
 	{
 		fx++;
-		printf("Ponto Local (%d,%d)\n", x, y);
+		printf("Ponto Local (%d,%d)\n", fx, fy);
 		if (kreturn == RETX)
 		{
 			return fx;
@@ -93,7 +124,7 @@ int Movimenta(int aa, int fx, int fy, int kreturn)
 	if (aa == TRAS)
 	{
 		fy--;
-		printf("Ponto Local (%d,%d)\n", x, y);
+		printf("Ponto Local (%d,%d)\n", fx, fy);
 		if (kreturn == RETY)
 		{
 			return fy;
@@ -103,7 +134,7 @@ int Movimenta(int aa, int fx, int fy, int kreturn)
 	if (aa == ESQUERDA)
 	{
 		fx--;
-		printf("Ponto Local (%d,%d)\n", x, y);
+		printf("Ponto Local (%d,%d)\n", fx, fy);
 		if (kreturn == RETX)
 		{
 			return fx;
@@ -351,6 +382,37 @@ x - cx
 	}
 }
 
+void Destino(int fx,int fy, int rotax, int rotay)
+{
+
+	while ((fx != rotax) || (fy != rotay))
+	{
+		if (fx < rotax)
+		{
+			fx = Movimenta(Anda(DIREITA), fx, fy, RETX);
+		}
+
+		if (fx > rotax)
+		{
+			fx = Movimenta(Anda(ESQUERDA), fx, fy, RETX);
+		}
+
+		if (fy < rotay)
+		{
+			fy = Movimenta(Anda(FRENTE), fx, fy, RETY);
+		}
+
+		if (fy > rotay)
+		{
+			fy = Movimenta(Anda(TRAS), fx, fy, RETY);
+		}
+
+
+		printf("ponto (x:%d,y:%d)\n ",fx,fy);
+
+	}
+	
+}
 void teste()
 {
 	printf(" Nascimento\n");
@@ -462,4 +524,40 @@ void teste2()
 	DetectaComida(1,1,-15,15);
 	DetectaComida(1,1,-15,15);
 	
+}
+
+void teste3()
+{
+	int x = 1;
+	int y = 1;
+	int rotax = 10;
+	int rotay = 60;
+
+	while ((x != rotax) || (y != rotay))
+	{
+		if (x < rotax)
+		{
+			x = Movimenta(Anda(DIREITA), x, y, RETX);
+		}
+
+		if (x > rotax)
+		{
+			x = Movimenta(Anda(ESQUERDA), x, y, RETX);
+		}
+
+		if (y < rotay)
+		{
+			y = Movimenta(Anda(FRENTE), x, y, RETY);
+		}
+
+		if (y > rotay)
+		{
+			y = Movimenta(Anda(TRAS), x, y, RETY);
+		}
+
+
+		printf("ponto (x:%d,y:%d)\n ",x,y);
+
+	}
+
 }
