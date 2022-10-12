@@ -26,35 +26,10 @@ void teste3();
 
 int main()
 {
-	int x = 1;
-	int y = 1;
-	int rotax = 10;
-	int rotay = 60;
+int x = 1;
+int y = 1;
 
-	while ((x != rotax) || (y != rotay))
-	{
-		if (x < rotax)
-		{
-			x = Movimenta(Anda(DIREITA), x, y, RETX);
-		}
-
-		if (x > rotax)
-		{
-			x = Movimenta(Anda(ESQUERDA), x, y, RETX);
-		}
-
-		if (y < rotay)
-		{
-			y = Movimenta(Anda(FRENTE), x, y, RETY);
-		}
-
-		if (y > rotay)
-		{
-			y = Movimenta(Anda(TRAS), x, y, RETY);
-		}
-
-	}
-
+Destino(x,y,25,10);
 	
 	
 	printf(" Fim do Programa");
