@@ -3,6 +3,7 @@
 int x;
 int y;
 
+
 const int FRENTE = 0;
 const int DIREITA = 1;
 const int TRAS = 2;
@@ -12,26 +13,79 @@ const int RETY = 5;
 const int COMIDASIM = 6;
 const int COMIDANAO = 7;
 
+ int seed[] =
+		{ 67, 3, 126, 11, 14, 92, 29, 47, 99, 86, 8, 12, 55, 21, 87, 110, 23, 1, 96, 57, 70, 17,
+   26, 118, 27, 74, 31, 114, 122, 6, 61, 82, 41, 46, 15, 72, 52, 42, 69, 68, 4, 127, 93, 30, 48,
+   100, 9, 13, 56, 22, 88, 111, 24, 2, 97, 58, 71, 119, 28, 75, 32, 115, 123, 7, 62, 83, 49, 16,
+   73, 53, 43, 5, 128, 94, 101 };
+
 int Anda(int anda);
 void Limite(void);
 int Movimenta(int aa, int fx, int fy, int kreturn);
 int DetectaComida(int x, int y, int cx, int cy);
-void Destino(int fx,int fy, int rotax, int rotay);
+void Destino(int fx, int fy, int rotax, int rotay);
 
 void teste();
 void teste1();
 void teste2();
 void teste3();
+void teste4();
 
 
 int main()
 {
-int x = 1;
-int y = 1;
 
-Destino(x,y,25,10);
+	x = 0;
+	int tam = 0;
+
+	while (seed[x] != 101)
+	{
+		tam++;
+		printf(" tam = %d\n", tam);
+		x++;
+	}
+
+	x = 0;
+	y = 0;
+
+	while (x != tam)
+	{
+		printf(" x = %d\n y = %d\n\n",x,y);
+		if (x == y)
+		{
+			y++;
+		}
+		
+		if (seed[x] == seed[y])
+		{
+			printf("Numeros repetidos entre x e y. Altere y\n");
+			getchar();
+		}
+		else
+		{
+			y++;
+		}
+
+		if (y == tam)
+		{
+			x++;
+			y = 0;
+		}
+		
+		if(y == (tam + 1))
+		{
+			x++;
+			y = 0;
+		}
 	
-	
+	}
+
+	if (x == tam)
+	{
+		printf(" Numeros randomicos completo 1 a 128\n");
+	}
+
+
 	printf(" Fim do Programa");
 
 	return 0;
@@ -126,31 +180,24 @@ int DetectaComida(int x, int y, int cx, int cy)
 
 	/* 
 
-	   -1 + 1 (-1 -1)
-	   x- cx
+	   -1 + 1 (-1 -1) x- cx
 
 	   se resultado for < 0 multiplica (-1)
 
-	   -2 -1 (-2 +1)
-	   x - cx
+	   -2 -1 (-2 +1) x - cx
 
 	   se resultado for < 0 multiplica (-1)
 
-	   -1 - 2
-x - cx
-	   ordena maior > menor
+	   -1 - 2 x - cx ordena maior > menor
 
 	   (-2+1)(*-1)
 
-	   -5 +1 (-5-1)*(-1)
-	   x - cx
+	   -5 +1 (-5-1)*(-1) x - cx
 
-	   +2+3
-x - cx
-	   ordena maior > menor
+	   +2+3 x - cx ordena maior > menor
 
 	   (3-2)
-	   
+
 
 	   se resultado for < 0 multiplica por (-1)
 
@@ -247,11 +294,11 @@ x - cx
 
 			}
 		}
-		
+
 	}
-	
-	//=====================
-	
+
+	// =====================
+
 	if (cy < 0)
 	{
 		if (y < 0)
@@ -327,7 +374,7 @@ x - cx
 				z1 = (cy - y);
 				if (z1 < 0)
 				{
-					z1= z1 * (-1);
+					z1 = z1 * (-1);
 				}
 
 			}
@@ -341,11 +388,11 @@ x - cx
 
 			}
 		}
-		
+
 	}
 
 
-	if (( z <= range)&& (z1 <= range))
+	if ((z <= range) && (z1 <= range))
 	{
 		printf(" Comida proximo ( < 10)\n");
 		return COMIDASIM;
@@ -357,7 +404,7 @@ x - cx
 	}
 }
 
-void Destino(int fx,int fy, int rotax, int rotay)
+void Destino(int fx, int fy, int rotax, int rotay)
 {
 
 	while ((fx != rotax) || (fy != rotay))
@@ -383,11 +430,12 @@ void Destino(int fx,int fy, int rotax, int rotay)
 		}
 
 
-		printf("ponto (x:%d,y:%d)\n ",fx,fy);
+		printf("ponto (x:%d,y:%d)\n ", fx, fy);
 
 	}
-	
+
 }
+
 void teste()
 {
 	printf(" Nascimento\n");
@@ -491,14 +539,14 @@ void teste1()
 void teste2()
 {
 	printf("Teste 1\n");
-	DetectaComida(1,1,-15,15);
-	DetectaComida(1,1,-9,9);
-	DetectaComida(1,1,9,9);
-	DetectaComida(1,1,-39,-1);
-	DetectaComida(-32,10,-39,15);
-	DetectaComida(1,1,-15,15);
-	DetectaComida(1,1,-15,15);
-	
+	DetectaComida(1, 1, -15, 15);
+	DetectaComida(1, 1, -9, 9);
+	DetectaComida(1, 1, 9, 9);
+	DetectaComida(1, 1, -39, -1);
+	DetectaComida(-32, 10, -39, 15);
+	DetectaComida(1, 1, -15, 15);
+	DetectaComida(1, 1, -15, 15);
+
 }
 
 void teste3()
@@ -531,8 +579,17 @@ void teste3()
 		}
 
 
-		printf("ponto (x:%d,y:%d)\n ",x,y);
+		printf("ponto (x:%d,y:%d)\n ", x, y);
 
 	}
+
+}
+
+void teste4()
+{
+	int x = 1;
+	int y = 1;
+
+	Destino(x, y, 25, 10);
 
 }
