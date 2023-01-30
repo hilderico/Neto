@@ -13,11 +13,14 @@ const int RETY = 5;
 const int COMIDASIM = 6;
 const int COMIDANAO = 7;
 
- int seed[] =
-		{ 67, 3, 126, 11, 14, 92, 29, 47, 99, 86, 8, 12, 55, 21, 87, 110, 23, 1, 96, 57, 70, 17,
-   26, 118, 27, 74, 31, 114, 122, 6, 61, 82, 41, 46, 15, 72, 52, 42, 69, 68, 4, 127, 93, 30, 48,
-   100, 9, 13, 56, 22, 88, 111, 24, 2, 97, 58, 71, 119, 28, 75, 32, 115, 123, 7, 62, 83, 49, 16,
-   73, 53, 43, 5, 128, 94, 76,81,95,59,106,117,18,36,50,66,89,104,116,19,38,60,80,102,113,20,40,65,91,109,10,44,78,103,124,37,77,105,0,51,90,121,45,98,25,64,112,101 };
+int seed[] =
+	{ 67, 3, 126, 11, 14, 92, 29, 47, 99, 86, 8, 12, 55, 21, 87, 110, 23, 1, 96, 57, 70, 17,
+	26, 118, 27, 74, 31, 114, 122, 6, 61, 82, 41, 46, 15, 72, 52, 42, 69, 68, 4, 127, 93, 30, 48,
+	100, 9, 13, 56, 22, 88, 111, 24, 2, 97, 58, 71, 119, 28, 75, 32, 115, 123, 7, 62, 83, 49, 16,
+	73, 53, 43, 5, 128, 94, 76, 81, 95, 59, 106, 117, 18, 36, 50, 66, 89, 104, 116, 19, 38, 60, 80,
+		102, 113, 20, 40, 65, 91, 109, 10, 44, 78, 103, 124, 37, 77, 105, 0, 51, 90, 121, 45, 98,
+		25, 64, 112, 101
+};
 
 int Anda(int anda);
 void Limite(void);
@@ -35,27 +38,27 @@ void teste4();
 
 int main()
 {
-// testram();
-int test128[128];
+	// testram();
+	int test128[128];
 
-for(x = 0; x < 128; x++)
-{
-	test128[x] = x;
-}
-
-printf("test128[0...128] = {");
-for(x = 0; x < 128; x++)
-{
-	printf("%d, ",test128[x]);
-	if((x % 10) == 0)
+	for (x = 0; x < 128; x++)
 	{
-		printf("\n");
+		test128[x] = x;
 	}
-}
 
-printf("} ");
-x = 0;
-int tam = 0;
+	printf("test128[0...128] = {");
+	for (x = 0; x < 128; x++)
+	{
+		printf("%d, ", test128[x]);
+		if ((x % 10) == 0)
+		{
+			printf("\n");
+		}
+	}
+
+	printf("} ");
+	x = 0;
+	int tam = 0;
 
 	while (seed[x] != 101)
 	{
@@ -63,38 +66,38 @@ int tam = 0;
 		x++;
 	}
 
-printf(" tam = %d\n",tam);
+	printf(" tam = %d\n", tam);
 
-x = 0;
-y = 0;
-
-while(x < 128)
-{
-	
-if(test128[x] == seed[y])
-{
- test128[x] = 999;
-}
-y++;
-if(y >= tam)
-{
-	x++;
+	x = 0;
 	y = 0;
-}
-}
 
-printf("test128[0...128] = {");
-for(x = 0; x < 128; x++)
-{
-	if(test128[x] != 999)
+	while (x < 128)
 	{
-	printf("%d, ",test128[x]);
+
+		if (test128[x] == seed[y])
+		{
+			test128[x] = 999;
+		}
+		y++;
+		if (y >= tam)
+		{
+			x++;
+			y = 0;
+		}
 	}
-	if((x % 10) == 0)
+
+	printf("test128[0...128] = {");
+	for (x = 0; x < 128; x++)
 	{
-		printf("\n");
+		if (test128[x] != 999)
+		{
+			printf("%d, ", test128[x]);
+		}
+		if ((x % 10) == 0)
+		{
+			printf("\n");
+		}
 	}
-}
 
 
 	printf(" Fim do Programa");
@@ -449,7 +452,7 @@ void Destino(int fx, int fy, int rotax, int rotay)
 
 void testram()
 {
-		x = 0;
+	x = 0;
 	int tam = 0;
 
 	while (seed[x] != 101)
@@ -464,12 +467,12 @@ void testram()
 
 	while (x != tam)
 	{
-		printf(" x = %d\n y = %d\n\n",x,y);
+		printf(" x = %d\n y = %d\n\n", x, y);
 		if (x == y)
 		{
 			y++;
 		}
-		
+
 		if (seed[x] == seed[y])
 		{
 			printf("Numeros repetidos entre x e y. Altere y\n");
@@ -485,20 +488,20 @@ void testram()
 			x++;
 			y = 0;
 		}
-		
-		if(y == (tam + 1))
+
+		if (y == (tam + 1))
 		{
 			x++;
 			y = 0;
 		}
-	
+
 	}
 
 	if (x == tam)
 	{
 		printf(" Numeros randomicos completo 1 a 128\n");
 	}
-	
+
 }
 
 void teste()
