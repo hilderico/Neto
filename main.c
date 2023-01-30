@@ -19,7 +19,7 @@ int seed[] =
 	100, 9, 13, 56, 22, 88, 111, 24, 2, 97, 58, 71, 119, 28, 75, 32, 115, 123, 7, 62, 83, 49, 16,
 	73, 53, 43, 5, 128, 94, 76, 81, 95, 59, 106, 117, 18, 36, 50, 66, 89, 104, 116, 19, 38, 60, 80,
 		102, 113, 20, 40, 65, 91, 109, 10, 44, 78, 103, 124, 37, 77, 105, 0, 51, 90, 121, 45, 98,
-		25, 64, 112, 101
+		25, 64, 112, 54, 108, 63, 33, 107, 84, 39, 79, 85, 120, 34, 35, 125, 101
 };
 
 int Anda(int anda);
@@ -28,76 +28,21 @@ int Movimenta(int aa, int fx, int fy, int kreturn);
 int DetectaComida(int x, int y, int cx, int cy);
 void Destino(int fx, int fy, int rotax, int rotay);
 void testram();
+void cmpram();
 
 void teste();
 void teste1();
 void teste2();
 void teste3();
 void teste4();
+void teste5();
+void teste6();
 
 
 int main()
 {
-	// testram();
-	int test128[128];
-
-	for (x = 0; x < 128; x++)
-	{
-		test128[x] = x;
-	}
-
-	printf("test128[0...128] = {");
-	for (x = 0; x < 128; x++)
-	{
-		printf("%d, ", test128[x]);
-		if ((x % 10) == 0)
-		{
-			printf("\n");
-		}
-	}
-
-	printf("} ");
-	x = 0;
-	int tam = 0;
-
-	while (seed[x] != 101)
-	{
-		tam++;
-		x++;
-	}
-
-	printf(" tam = %d\n", tam);
-
-	x = 0;
-	y = 0;
-
-	while (x < 128)
-	{
-
-		if (test128[x] == seed[y])
-		{
-			test128[x] = 999;
-		}
-		y++;
-		if (y >= tam)
-		{
-			x++;
-			y = 0;
-		}
-	}
-
-	printf("test128[0...128] = {");
-	for (x = 0; x < 128; x++)
-	{
-		if (test128[x] != 999)
-		{
-			printf("%d, ", test128[x]);
-		}
-		if ((x % 10) == 0)
-		{
-			printf("\n");
-		}
-	}
+	 testram();
+	cmpram();
 
 
 	printf(" Fim do Programa");
@@ -504,6 +449,70 @@ void testram()
 
 }
 
+void cmpram()
+{
+	int test128[128];
+
+	for (x = 0; x < 128; x++)
+	{
+		test128[x] = x;
+	}
+
+	printf("test128[0...128] = {");
+	for (x = 0; x < 128; x++)
+	{
+		printf("%d, ", test128[x]);
+		if ((x % 10) == 0)
+		{
+			printf("\n");
+		}
+	}
+
+	printf("} ");
+	x = 0;
+	int tam = 0;
+
+	while (seed[x] != 101)
+	{
+		tam++;
+		x++;
+	}
+
+	printf(" tam = %d\n", tam);
+
+	x = 0;
+	y = 0;
+
+	while (x < 128)
+	{
+
+		if (test128[x] == seed[y])
+		{
+			test128[x] = 999;
+		}
+		y++;
+		if (y >= tam)
+		{
+			x++;
+			y = 0;
+		}
+	}
+
+	printf("test128[0...128] = {");
+	for (x = 0; x < 128; x++)
+	{
+		if (test128[x] != 999)
+		{
+			printf("%d, ", test128[x]);
+		}
+		if ((x % 10) == 0)
+		{
+			printf("\n");
+		}
+	}
+	
+}
+
 void teste()
 {
 	printf(" Nascimento\n");
@@ -660,4 +669,75 @@ void teste4()
 
 	Destino(x, y, 25, 10);
 
+}
+
+void teste5()
+{
+	testram();
+	int test128[128];
+
+	for (x = 0; x < 128; x++)
+	{
+		test128[x] = x;
+	}
+
+	printf("test128[0...128] = {");
+	for (x = 0; x < 128; x++)
+	{
+		printf("%d, ", test128[x]);
+		if ((x % 10) == 0)
+		{
+			printf("\n");
+		}
+	}
+
+	printf("} ");
+	x = 0;
+	int tam = 0;
+
+	while (seed[x] != 101)
+	{
+		tam++;
+		x++;
+	}
+
+	printf(" tam = %d\n", tam);
+
+	x = 0;
+	y = 0;
+
+	while (x < 128)
+	{
+
+		if (test128[x] == seed[y])
+		{
+			test128[x] = 999;
+		}
+		y++;
+		if (y >= tam)
+		{
+			x++;
+			y = 0;
+		}
+	}
+
+	printf("test128[0...128] = {");
+	for (x = 0; x < 128; x++)
+	{
+		if (test128[x] != 999)
+		{
+			printf("%d, ", test128[x]);
+		}
+		if ((x % 10) == 0)
+		{
+			printf("\n");
+		}
+	}
+	
+}
+
+void teste6()
+{
+	testram();
+	cmpram();
 }
