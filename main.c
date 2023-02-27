@@ -13,7 +13,7 @@ const int RETY = 5;
 const int COMIDASIM = 6;
 const int COMIDANAO = 7;
 
-int seed[] =
+int seed0 [] =
 	{ 67, 3, 126, 11, 14, 92, 29, 47, 99, 86, 8, 12, 55, 21, 87, 110, 23, 1, 96, 57, 70, 17,
 	26, 118, 27, 74, 31, 114, 122, 6, 61, 82, 41, 46, 15, 72, 52, 42, 69, 68, 4, 127, 93, 30, 48,
 	100, 9, 13, 56, 22, 88, 111, 24, 2, 97, 58, 71, 119, 28, 75, 32, 115, 123, 7, 62, 83, 49, 16,
@@ -22,7 +22,7 @@ int seed[] =
 		25, 64, 112, 54, 108, 63, 33, 107, 84, 39, 79, 85, 120, 34, 35, 125, 101
 };
 
-int seed1[] =
+int seed1 [] =
 	{74,
 10, 126, 18, 21, 99, 36, 54, 106, 93, 15,
 19, 62, 28, 94, 117, 30, 8, 103, 64, 77,
@@ -46,6 +46,7 @@ int DetectaComida(int x, int y, int cx, int cy);
 void Destino(int fx, int fy, int rotax, int rotay);
 void testram();
 void cmpram();
+void criaseed(int seed[128]);
 
 void teste();
 void teste1();
@@ -54,39 +55,13 @@ void teste3();
 void teste4();
 void teste5();
 void teste6();
+void teste7();
 
 
 int main()
 {
-	int test128[128];
-	
-	for (x = 0; x < 128; x++)
-	{
-		test128[x] = 0;
-	}
-	
-	for (x = 0; x < 128; x++)
-	{
-		test128[x] = seed[x] + 7;
-		if(test128[x] > 128)
-		{
-			test128[x] = seed[x] % 129;
-		}
-	}
-	
-	printf("test128[0...128] = {");
-	for (x = 0; x < 128; x++)
-	{
-		printf("%d, ", test128[x]);
-		if ((x % 10) == 0)
-		{
-			printf("\n");
-		}
-	}
 
-	printf("} ");
-	
-	
+criaseed(seed1);
 	
 	printf(" Fim do Programa");
 	return 0;
@@ -442,7 +417,7 @@ void testram()
 	x = 0;
 	int tam = 0;
 
-	while (seed[x] != 101)
+	while (seed1[x] != 101)
 	{
 		tam++;
 		printf(" tam = %d\n", tam);
@@ -460,7 +435,7 @@ void testram()
 			y++;
 		}
 
-		if (seed[x] == seed[y])
+		if (seed1[x] == seed1[y])
 		{
 			printf("Numeros repetidos entre x e y. Altere y\n");
 			getchar();
@@ -514,7 +489,7 @@ void cmpram()
 	x = 0;
 	int tam = 0;
 
-	while (seed[x] != 101)
+	while (seed1[x] != 101)
 	{
 		tam++;
 		x++;
@@ -528,7 +503,7 @@ void cmpram()
 	while (x < 128)
 	{
 
-		if (test128[x] == seed[y])
+		if (test128[x] == seed1[y])
 		{
 			test128[x] = 999;
 		}
@@ -552,6 +527,39 @@ void cmpram()
 			printf("\n");
 		}
 	}
+	
+}
+
+void criaseed(int seed[128])
+{
+		int test128[128];
+	
+	for (x = 0; x < 128; x++)
+	{
+		test128[x] = 0;
+	}
+	
+	for (x = 0; x < 128; x++)
+	{
+		test128[x] = seed[x] + 7;
+		if(test128[x] > 128)
+		{
+			test128[x] = seed[x] % 129;
+		}
+	}
+	
+	printf("test128[0...128] = {");
+	for (x = 0; x < 128; x++)
+	{
+		printf("%d, ", test128[x]);
+		if ((x % 10) == 0)
+		{
+			printf("\n");
+		}
+	}
+
+	printf("} ");
+	
 	
 }
 
@@ -737,7 +745,7 @@ void teste5()
 	x = 0;
 	int tam = 0;
 
-	while (seed[x] != 101)
+	while (seed1[x] != 101)
 	{
 		tam++;
 		x++;
@@ -751,7 +759,7 @@ void teste5()
 	while (x < 128)
 	{
 
-		if (test128[x] == seed[y])
+		if (test128[x] == seed1[y])
 		{
 			test128[x] = 999;
 		}
@@ -783,3 +791,36 @@ void teste6()
 	testram();
 	cmpram();
 }
+
+void teste7()
+{
+	int test128[128];
+	
+	for (x = 0; x < 128; x++)
+	{
+		test128[x] = 0;
+	}
+	
+	for (x = 0; x < 128; x++)
+	{
+		test128[x] = seed1[x] + 7;
+		if(test128[x] > 128)
+		{
+			test128[x] = seed1[x] % 129;
+		}
+	}
+	
+	printf("test128[0...128] = {");
+	for (x = 0; x < 128; x++)
+	{
+		printf("%d, ", test128[x]);
+		if ((x % 10) == 0)
+		{
+			printf("\n");
+		}
+	}
+
+	printf("} ");
+
+}
+
