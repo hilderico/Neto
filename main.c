@@ -44,8 +44,8 @@ void Limite(void);
 int Movimenta(int aa, int fx, int fy, int kreturn);
 int DetectaComida(int x, int y, int cx, int cy);
 void Destino(int fx, int fy, int rotax, int rotay);
-void testram();
-void cmpram();
+void testram(int seed[128]);
+void cmpram(int seed[128]);
 void criaseed(int seed[128]);
 
 void teste();
@@ -412,12 +412,12 @@ void Destino(int fx, int fy, int rotax, int rotay)
 
 }
 
-void testram()
+void testram(int seed[128])
 {
 	x = 0;
 	int tam = 0;
 
-	while (seed1[x] != 101)
+	while (seed[x] != 101)
 	{
 		tam++;
 		printf(" tam = %d\n", tam);
@@ -435,7 +435,7 @@ void testram()
 			y++;
 		}
 
-		if (seed1[x] == seed1[y])
+		if (seed[x] == seed[y])
 		{
 			printf("Numeros repetidos entre x e y. Altere y\n");
 			getchar();
@@ -466,7 +466,7 @@ void testram()
 
 }
 
-void cmpram()
+void cmpram(int seed[128])
 {
 	int test128[128];
 
@@ -489,7 +489,7 @@ void cmpram()
 	x = 0;
 	int tam = 0;
 
-	while (seed1[x] != 101)
+	while (seed[x] != 101)
 	{
 		tam++;
 		x++;
@@ -503,7 +503,7 @@ void cmpram()
 	while (x < 128)
 	{
 
-		if (test128[x] == seed1[y])
+		if (test128[x] == seed[y])
 		{
 			test128[x] = 999;
 		}
@@ -723,7 +723,7 @@ void teste4()
 
 void teste5()
 {
-	testram();
+	testram(seed0);
 	int test128[128];
 
 	for (x = 0; x < 128; x++)
@@ -745,7 +745,7 @@ void teste5()
 	x = 0;
 	int tam = 0;
 
-	while (seed1[x] != 101)
+	while (seed0[x] != 101)
 	{
 		tam++;
 		x++;
@@ -759,7 +759,7 @@ void teste5()
 	while (x < 128)
 	{
 
-		if (test128[x] == seed1[y])
+		if (test128[x] == seed0[y])
 		{
 			test128[x] = 999;
 		}
@@ -788,8 +788,8 @@ void teste5()
 
 void teste6()
 {
-	testram();
-	cmpram();
+	testram(seed0);
+	cmpram(seed0);
 }
 
 void teste7()
