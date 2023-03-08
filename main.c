@@ -2,6 +2,9 @@
 
 int x;
 int y;
+int comida_x[10];
+int comida_y[10];
+int comida = 3;
 
 
 const int FRENTE = 0;
@@ -13,37 +16,36 @@ const int RETY = 5;
 const int COMIDASIM = 6;
 const int COMIDANAO = 7;
 
-int seed0 [] =
+int seed0[] =
 	{ 67, 3, 126, 11, 14, 92, 29, 47, 99, 86, 8, 12, 55, 21, 87, 110, 23, 1, 96, 57, 70, 17,
 	26, 118, 27, 74, 31, 114, 122, 6, 61, 82, 41, 46, 15, 72, 52, 42, 69, 68, 4, 127, 93, 30, 48,
 	100, 9, 13, 56, 22, 88, 111, 24, 2, 97, 58, 71, 119, 28, 75, 32, 115, 123, 7, 62, 83, 49, 16,
 	73, 53, 43, 5, 128, 94, 76, 81, 95, 59, 106, 117, 18, 36, 50, 66, 89, 104, 116, 19, 38, 60, 80,
-		102, 113, 20, 40, 65, 91, 109, 10, 44, 78, 103, 124, 37, 77, 105, 0, 51, 90, 121, 45, 98,
-		25, 64, 112, 54, 108, 63, 33, 107, 84, 39, 79, 85, 120, 34, 35, 125, 101
+	102, 113, 20, 40, 65, 91, 109, 10, 44, 78, 103, 124, 37, 77, 105, 0, 51, 90, 121, 45, 98,
+	25, 64, 112, 54, 108, 63, 33, 107, 84, 39, 79, 85, 120, 34, 35, 125, 101
 };
 
-int seed1 [] =
-	{74,
-10, 126, 18, 21, 99, 36, 54, 106, 93, 15,
-19, 62, 28, 94, 117, 30, 8, 103, 64, 77,
-24, 33, 125, 34, 81, 38, 121, 122, 13, 68,
-89, 48, 53, 22, 79, 59, 49, 76, 75, 11,
-127, 100, 37, 55, 107, 16, 20, 63, 29, 95,
-118, 31, 9, 104, 65, 78, 126, 35, 82, 39,
-122, 123, 14, 69, 90, 56, 23, 80, 60, 50,
-12, 128, 125, 83, 88, 102, 66, 113, 124, 25,
-43, 57, 73, 96, 111, 123, 26, 45, 67, 87,
-109, 120, 27, 47, 72, 98, 116, 17, 51, 85,
-110, 124, 44, 84, 112, 7, 58, 97, 128, 52,
-105, 32, 71, 119, 61, 115, 70, 40, 114, 91,
-46, 86, 92, 127, 41, 42, 101
+int seed1[] = { 74,
+	10, 126, 18, 21, 99, 36, 54, 106, 93, 15,
+	19, 62, 28, 94, 117, 30, 8, 103, 64, 77,
+	24, 33, 125, 34, 81, 38, 121, 122, 13, 68,
+	89, 48, 53, 22, 79, 59, 49, 76, 75, 11,
+	127, 100, 37, 55, 107, 16, 20, 63, 29, 95,
+	118, 31, 9, 104, 65, 78, 126, 35, 82, 39,
+	122, 123, 14, 69, 90, 56, 23, 80, 60, 50,
+	12, 128, 125, 83, 88, 102, 66, 113, 124, 25,
+	43, 57, 73, 96, 111, 123, 26, 45, 67, 87,
+	109, 120, 27, 47, 72, 98, 116, 17, 51, 85,
+	110, 124, 44, 84, 112, 7, 58, 97, 128, 52,
+	105, 32, 71, 119, 61, 115, 70, 40, 114, 91,
+	46, 86, 92, 127, 41, 42, 101
 };
 
 int Anda(int anda);
 void Limite(void);
 int Movimenta(int aa, int fx, int fy, int kreturn);
 int DetectaComida(int x, int y, int cx, int cy);
-void Destino(int fx, int fy, int rotax, int rotay);
+void Destino(int *fx, int *fy, int rotax, int rotay);
 void testram(int seed[128]);
 void cmpram(int seed[128]);
 void criaseed(int seed[128]);
@@ -60,9 +62,32 @@ void teste7();
 
 int main()
 {
-
-criaseed(seed1);
+	x = 0;
+	y = 0;
 	
+	int cont = 0;
+	
+
+	comida_x[0] = seed0[12]; //55
+	comida_x[1] = seed0[34]; // 15
+	comida_x[2] = seed0[16]; //23
+
+	comida_y[0] = seed1[12]; //62
+	comida_y[1] = seed1[34]; //22
+	comida_y[2] = seed1[16]; //30
+	
+while((comida != 0) && (cont != 127))
+{
+	printf("cont = %d\n",cont);
+	printf("comida = %d\n", comida);
+	getchar();
+	Destino(&x, &y, seed0[cont], seed1[cont]);
+	cont++;
+}
+	
+
+
+
 	printf(" Fim do Programa");
 	return 0;
 }
@@ -380,35 +405,76 @@ int DetectaComida(int x, int y, int cx, int cy)
 	}
 }
 
-void Destino(int fx, int fy, int rotax, int rotay)
+void Destino(int *fx, int *fy, int rotax, int rotay)
 {
+	int fcx;
+	int fcy;
+	int ffx = *fx;
+	int ffy = *fy;
+	int key = 1;
 
-	while ((fx != rotax) || (fy != rotay))
+	while ((ffx != rotax) && (ffy != rotay) || (key != 0))
 	{
-		if (fx < rotax)
+		printf("-> %d  -> %d \n",((ffx != rotax) && (ffy != rotay)), comida != 0);
+		getchar();
+		if (ffx < rotax)
 		{
-			fx = Movimenta(Anda(DIREITA), fx, fy, RETX);
+			ffx = Movimenta(Anda(DIREITA), ffx, ffy, RETX);
 		}
 
-		if (fx > rotax)
+		if (ffx > rotax)
 		{
-			fx = Movimenta(Anda(ESQUERDA), fx, fy, RETX);
+			ffx = Movimenta(Anda(ESQUERDA), ffx, ffy, RETX);
 		}
 
-		if (fy < rotay)
+		if (ffy < rotay)
 		{
-			fy = Movimenta(Anda(FRENTE), fx, fy, RETY);
+			ffy = Movimenta(Anda(FRENTE), ffx, ffy, RETY);
 		}
 
-		if (fy > rotay)
+		if (ffy > rotay)
 		{
-			fy = Movimenta(Anda(TRAS), fx, fy, RETY);
+			ffy = Movimenta(Anda(TRAS), ffx, ffy, RETY);
 		}
 
+printf("comida == %d\n",comida);
+printf("rotax = %d\n",rotax);
+printf("rotay = %d\n",rotay);
+		printf("ponto (x:%d,y:%d)\n ", ffx, ffy);
 
-		printf("ponto (x:%d,y:%d)\n ", fx, fy);
+		// detecta comida() aqui
+		int cc = 0;
+		while (cc != comida)
+		{
+			fcx = comida_x[cc];
+			fcy = comida_y[cc];
+			if (DetectaComida(ffx, ffy, fcx, fcy) == COMIDASIM)
+			{
+				rotax = fcx;
+				rotay = fcy;
+			}
+			cc++;
+		}
+//		if(comida != 0)
+//		{
+		if((ffx == fcx) && (ffy == fcy))
+		{
+			printf(" *fx == fcx && *fy == fcy\n");
+			getchar();
+			comida--;
+		}
+		
+		if((ffx != rotax) && (ffy != rotay))
+		{
+			key = 0;
+		}
+			
+//		}
+		
 
 	}
+	*fx = ffx;
+	*fy = ffy;
 
 }
 
@@ -527,27 +593,27 @@ void cmpram(int seed[128])
 			printf("\n");
 		}
 	}
-	
+
 }
 
 void criaseed(int seed[128])
 {
-		int test128[128];
-	
+	int test128[128];
+
 	for (x = 0; x < 128; x++)
 	{
 		test128[x] = 0;
 	}
-	
+
 	for (x = 0; x < 128; x++)
 	{
 		test128[x] = seed[x] + 7;
-		if(test128[x] > 128)
+		if (test128[x] > 128)
 		{
 			test128[x] = seed[x] % 129;
 		}
 	}
-	
+
 	printf("test128[0...128] = {");
 	for (x = 0; x < 128; x++)
 	{
@@ -559,8 +625,8 @@ void criaseed(int seed[128])
 	}
 
 	printf("} ");
-	
-	
+
+
 }
 
 void teste()
@@ -717,7 +783,7 @@ void teste4()
 	int x = 1;
 	int y = 1;
 
-	Destino(x, y, 25, 10);
+	Destino(&x, &y, 25, 10);
 
 }
 
@@ -783,7 +849,7 @@ void teste5()
 			printf("\n");
 		}
 	}
-	
+
 }
 
 void teste6()
@@ -795,21 +861,21 @@ void teste6()
 void teste7()
 {
 	int test128[128];
-	
+
 	for (x = 0; x < 128; x++)
 	{
 		test128[x] = 0;
 	}
-	
+
 	for (x = 0; x < 128; x++)
 	{
 		test128[x] = seed1[x] + 7;
-		if(test128[x] > 128)
+		if (test128[x] > 128)
 		{
 			test128[x] = seed1[x] % 129;
 		}
 	}
-	
+
 	printf("test128[0...128] = {");
 	for (x = 0; x < 128; x++)
 	{
@@ -823,4 +889,3 @@ void teste7()
 	printf("} ");
 
 }
-
