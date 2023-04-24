@@ -15,11 +15,17 @@ const int RETX = 4;
 const int RETY = 5;
 const int COMIDASIM = 6;
 const int COMIDANAO = 7;
+const int DEBUGON = 8;
+const int DEBUGOFF = 9;
 
 int seed0[] =
-	{ 67, 3, 126, 11, 14, 92, 29, 47, 99, 86, 8, 12, 55, 21, 87, 110, 23, 1, 96, 57, 70, 17,
-	26, 118, 27, 74, 31, 114, 122, 6, 61, 82, 41, 46, 15, 72, 52, 42, 69, 68, 4, 127, 93, 30, 48,
-	100, 9, 13, 56, 22, 88, 111, 24, 2, 97, 58, 71, 119, 28, 75, 32, 115, 123, 7, 62, 83, 49, 16,
+	{ 67, 3, 126, 11, 14, 92, 29, 47, 99, 86, 8, 
+	12, 55, 21, 87, 110, 23, 1, 96, 57, 70,
+	 17, 26, 118, 27, 74, 31, 114, 122, 6, 61, 
+	 82, 41, 46, 15, 72, 52, 42, 69, 68, 4, 
+	 127, 93, 30, 48, 100, 9, 13, 56, 22, 88, 
+	 111, 24, 2, 97, 58, 71, 119, 28, 75, 32, 
+	 115, 123, 7, 62, 83, 49, 16,
 	73, 53, 43, 5, 128, 94, 76, 81, 95, 59, 106, 117, 18, 36, 50, 66, 89, 104, 116, 19, 38, 60, 80,
 	102, 113, 20, 40, 65, 91, 109, 10, 44, 78, 103, 124, 37, 77, 105, 0, 51, 90, 121, 45, 98,
 	25, 64, 112, 54, 108, 63, 33, 107, 84, 39, 79, 85, 120, 34, 35, 125, 101
@@ -46,6 +52,7 @@ void Limite(void);
 int Movimenta(int aa, int fx, int fy, int kreturn);
 int DetectaComida(int x, int y, int cx, int cy);
 void Destino(int *fx, int *fy, int rotax, int rotay);
+void DDestino(int *fx, int *fy, int rotax, int rotay, int debug);
 void testram(int seed[128]);
 void cmpram(int seed[128]);
 void criaseed(int seed[128]);
@@ -58,6 +65,7 @@ void teste4();
 void teste5();
 void teste6();
 void teste7();
+void teste8();
 
 
 int main()
@@ -68,20 +76,25 @@ int main()
 	int cont = 0;
 	
 
-	comida_x[0] = seed0[12]; //55
-	comida_x[1] = seed0[34]; // 15
-	comida_x[2] = seed0[16]; //23
+	comida_x[0] = seed0[63]; //123
+	comida_x[1] = seed0[15]; // 110
+	comida_x[2] = seed0[23]; //118
 
-	comida_y[0] = seed1[12]; //62
-	comida_y[1] = seed1[34]; //22
-	comida_y[2] = seed1[16]; //30
+	comida_y[0] = seed1[62]; //123
+	comida_y[1] = seed1[22]; //22
+	comida_y[2] = seed1[30]; //30
 	
 while((comida != 0) && (cont != 127))
 {
 	printf("cont = %d\n",cont);
 	printf("comida = %d\n", comida);
-	getchar();
-	Destino(&x, &y, seed0[cont], seed1[cont]);
+	printf("comida loc 0 = (%d,%d)\n",comida_x[0], comida_y[0]);
+		printf("comida loc 1 = (%d,%d)\n",comida_x[1], comida_y[1]);
+			printf("comida loc 2 = (%d,%d)\n",comida_x[2], comida_y[2]);
+	
+	
+//	getchar();
+	DDestino(&x, &y, seed0[cont], seed1[127 - cont],DEBUGOFF);
 	cont++;
 }
 	
@@ -416,7 +429,7 @@ void Destino(int *fx, int *fy, int rotax, int rotay)
 	while ((ffx != rotax) && (ffy != rotay) || (key != 0))
 	{
 		printf("-> %d  -> %d \n",((ffx != rotax) && (ffy != rotay)), comida != 0);
-		getchar();
+//		getchar();
 		if (ffx < rotax)
 		{
 			ffx = Movimenta(Anda(DIREITA), ffx, ffy, RETX);
@@ -477,6 +490,94 @@ printf("rotay = %d\n",rotay);
 	*fy = ffy;
 
 }
+
+void DDestino(int *fx, int *fy, int rotax, int rotay, int debug)
+{
+	int fcx = 0;
+	int fcy = 0;
+	int ffx = *fx;
+	int ffy = *fy;
+	int key = 1;
+	int dcont =0;
+
+	while ((ffx != rotax) || (ffy != rotay) || (key != 0))
+	{
+		dcont++;
+		printf("ffx e ffy-> %d, comida-> %d, key-> %d\n",((ffx != rotax) || (ffy != rotay)), comida != 0,key);
+		if(debug == DEBUGON)
+		{
+			if((dcont % 10) == 0)
+			{
+		getchar();
+			}
+		}
+		if (ffx < rotax)
+		{
+			ffx = Movimenta(Anda(DIREITA), ffx, ffy, RETX);
+		}
+
+		if (ffx > rotax)
+		{
+			ffx = Movimenta(Anda(ESQUERDA), ffx, ffy, RETX);
+		}
+
+		if (ffy < rotay)
+		{
+			ffy = Movimenta(Anda(FRENTE), ffx, ffy, RETY);
+		}
+
+		if (ffy > rotay)
+		{
+			ffy = Movimenta(Anda(TRAS), ffx, ffy, RETY);
+		}
+
+printf("comida == %d\n",comida);
+printf("rotax = %d\n",rotax);
+printf("rotay = %d\n",rotay);
+		printf("ponto (x:%d,y:%d)\n ", ffx, ffy);
+
+		// detecta comida() aqui
+		int cc = 0;
+		while (cc != comida)
+		{
+			fcx = comida_x[cc];
+			fcy = comida_y[cc];
+			if (DetectaComida(ffx, ffy, fcx, fcy) == COMIDASIM)
+			{
+				rotax = fcx;
+				rotay = fcy;
+			}
+			cc++;
+			printf("while (cc != comida)\n");
+		}
+//		if(comida != 0)
+//		{
+		if((ffx == fcx) && (ffy == fcy))
+		{
+			printf(" *fx == fcx && *fy == fcy\n");
+			if(debug == DEBUGON)
+			{
+			getchar();
+			}
+			comida--;
+		}
+		
+		if((ffx == rotax) && (ffy == rotay))
+		{
+			key = 0;
+			printf("if((ffx == rotax) && (ffy == rotay))\n");
+		}
+			
+//		}
+		
+
+	}
+	*fx = ffx;
+	*fy = ffy;
+	printf("*fx = ffx;\n*fy = ffy;\n");
+
+}
+
 
 void testram(int seed[128])
 {
@@ -888,4 +989,37 @@ void teste7()
 
 	printf("} ");
 
+}
+
+void teste8()
+{
+		x = 0;
+	y = 0;
+	
+	int cont = 0;
+	
+
+	comida_x[0] = seed0[63]; //123
+	comida_x[1] = seed0[15]; // 110
+	comida_x[2] = seed0[23]; //118
+
+	comida_y[0] = seed1[62]; //123
+	comida_y[1] = seed1[22]; //22
+	comida_y[2] = seed1[30]; //30
+	
+while((comida != 0) && (cont != 127))
+{
+	printf("cont = %d\n",cont);
+	printf("comida = %d\n", comida);
+	printf("comida loc 0 = (%d,%d)\n",comida_x[0], comida_y[0]);
+		printf("comida loc 1 = (%d,%d)\n",comida_x[1], comida_y[1]);
+			printf("comida loc 2 = (%d,%d)\n",comida_x[2], comida_y[2]);
+	
+	
+//	getchar();
+	Destino(&x, &y, seed0[cont], seed1[cont]);
+	cont++;
+}
+	
+	
 }
