@@ -1,0 +1,57 @@
+MAPA DO MAIN.C
+
+=========================
+VARIAVEIS:
+
+x;
+y;
+comida_x[10];
+comida_y[10];
+comida;
+
+int seed0[]	{ ... };
+int seed1[] { ... };
+
+
+=========================
+CONSTANTES:
+
+const int FRENTE = 0;
+const int DIREITA = 1;
+const int TRAS = 2;
+const int ESQUERDA = 3;
+const int RETX = 4;
+const int RETY = 5;
+const int COMIDASIM = 6;
+const int COMIDANAO = 7;
+const int DEBUGON = 8;
+const int DEBUGOFF = 9;
+
+=========================
+
+FUNÇÕES:
+
+int Anda(int anda);
+void Limite(void);
+int Movimenta(int aa, int fx, int fy, int kreturn);
+int DetectaComida(int x, int y, int cx, int cy);
+void Destino(int *fx, int *fy, int rotax, int rotay);
+void DDestino(int *fx, int *fy, int rotax, int rotay, int debug);
+void testram(int seed[128]);
+void cmpram(int seed[128]);
+void criaseed(int seed[128]);
+void teste();
+void teste1();
+void teste2();
+void teste3();
+void teste4();
+void teste5();
+void teste6();
+void teste7();
+void teste8();
+
+==========================
+PRINCIPAL:
+
+int main();
+

@@ -1,22 +1,12 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 int x;
 int y;
 int comida_x[10];
 int comida_y[10];
 int comida = 3;
-
-
-const int FRENTE = 0;
-const int DIREITA = 1;
-const int TRAS = 2;
-const int ESQUERDA = 3;
-const int RETX = 4;
-const int RETY = 5;
-const int COMIDASIM = 6;
-const int COMIDANAO = 7;
-const int DEBUGON = 8;
-const int DEBUGOFF = 9;
+int salvacomida = 0;
 
 int seed0[] =
 	{ 67, 3, 126, 11, 14, 92, 29, 47, 99, 86, 8, 
@@ -47,6 +37,19 @@ int seed1[] = { 74,
 	46, 86, 92, 127, 41, 42, 101
 };
 
+
+const int FRENTE = 0;
+const int DIREITA = 1;
+const int TRAS = 2;
+const int ESQUERDA = 3;
+const int RETX = 4;
+const int RETY = 5;
+const int COMIDASIM = 6;
+const int COMIDANAO = 7;
+const int DEBUGON = 8;
+const int DEBUGOFF = 9;
+
+
 int Anda(int anda);
 void Limite(void);
 int Movimenta(int aa, int fx, int fy, int kreturn);
@@ -72,17 +75,18 @@ int main()
 {
 	x = 0;
 	y = 0;
+	salvacomida = comida;
 	
 	int cont = 0;
 	
 
-	comida_x[0] = seed0[63]; //123
+	comida_x[0] = seed0[63]; // 7
 	comida_x[1] = seed0[15]; // 110
-	comida_x[2] = seed0[23]; //118
+	comida_x[2] = seed0[23]; // 118
 
-	comida_y[0] = seed1[62]; //123
-	comida_y[1] = seed1[22]; //22
-	comida_y[2] = seed1[30]; //30
+	comida_y[0] = seed1[62]; // 123
+	comida_y[1] = seed1[22]; // 33
+	comida_y[2] = seed1[30]; // 68
 	
 while((comida != 0) && (cont != 127))
 {
@@ -493,8 +497,12 @@ printf("rotay = %d\n",rotay);
 
 void DDestino(int *fx, int *fy, int rotax, int rotay, int debug)
 {
+	
 	int fcx = 0;
 	int fcy = 0;
+	int confcx = 0;
+	int confcy = 0;
+	int fidx = 0;
 	int ffx = *fx;
 	int ffy = *fy;
 	int key = 1;
@@ -538,7 +546,7 @@ printf("rotay = %d\n",rotay);
 
 		// detecta comida() aqui
 		int cc = 0;
-		while (cc != comida)
+		while (cc != salvacomida)
 		{
 			fcx = comida_x[cc];
 			fcy = comida_y[cc];
@@ -546,13 +554,20 @@ printf("rotay = %d\n",rotay);
 			{
 				rotax = fcx;
 				rotay = fcy;
+				confcx = fcx;
+				confcy = fcy;
+				fidx = cc;
 			}
 			cc++;
 			printf("while (cc != comida)\n");
 		}
 //		if(comida != 0)
 //		{
-		if((ffx == fcx) && (ffy == fcy))
+		printf("ffx = %d\n",ffx);
+		printf("confcx = %d\n",confcx);
+		printf("ffy = %d\n",ffy);
+		printf("confcy = %d\n",confcy);
+		if((ffx == confcx) && (ffy == confcy))
 		{
 			printf(" *fx == fcx && *fy == fcy\n");
 			if(debug == DEBUGON)
@@ -560,6 +575,8 @@ printf("rotay = %d\n",rotay);
 			getchar();
 			}
 			comida--;
+			comida_x[fidx] = 999;
+			comida_y[fidx] = 999;
 		}
 		
 		if((ffx == rotax) && (ffy == rotay))

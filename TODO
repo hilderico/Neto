@@ -1,1 +1,7 @@
-falta criar uma arvore de seeds randomicos
+!falta criar uma arvore de seeds randomicos
+	! prioridade:02
+
+!criar estrutura em arvore MAPA
+	! prioridade:01
+	@# notebook -> criando mapa
+	
