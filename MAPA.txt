@@ -1,57 +1,60 @@
 MAPA DO MAIN.C
 
+#include <stdio.h>
+#include <stdbool.h>
+
+#define MAX_COMIDA 10
+	
+=========================
+CONSTANTES:
+
+FRENTE = 0;
+DIREITA = 1;
+TRAS = 2;
+ESQUERDA = 3;
+RETX = 4;
+RETY = 5;
+COMIDASIM = 6;
+COMIDANAO = 7;
+DEBUGON = 8;
+DEBUGOFF = 9;
+
 =========================
 VARIAVEIS:
 
 x;
 y;
-comida_x[10];
-comida_y[10];
+comida_x[MAX_COMIDA];
+comida_y[MAX_COMIDA];
 comida;
-
-int seed0[]	{ ... };
-int seed1[] { ... };
-
-
-=========================
-CONSTANTES:
-
-const int FRENTE = 0;
-const int DIREITA = 1;
-const int TRAS = 2;
-const int ESQUERDA = 3;
-const int RETX = 4;
-const int RETY = 5;
-const int COMIDASIM = 6;
-const int COMIDANAO = 7;
-const int DEBUGON = 8;
-const int DEBUGOFF = 9;
+salvacomida;
+seed0[]	{ ... };
+seed1[] { ... };
 
 =========================
 
 FUNÇÕES:
 
-int Anda(int anda);
-void Limite(void);
-int Movimenta(int aa, int fx, int fy, int kreturn);
-int DetectaComida(int x, int y, int cx, int cy);
-void Destino(int *fx, int *fy, int rotax, int rotay);
-void DDestino(int *fx, int *fy, int rotax, int rotay, int debug);
-void testram(int seed[128]);
-void cmpram(int seed[128]);
-void criaseed(int seed[128]);
-void teste();
-void teste1();
-void teste2();
-void teste3();
-void teste4();
-void teste5();
-void teste6();
-void teste7();
-void teste8();
+Anda(anda);
+Limite(void);
+Movimenta(aa,fx,fy,kreturn);
+DetectaComida(x,y,cx,cy);
+Destino(*fx,*fy,rotax,rotay);
+DDestino(*fx,*fy,rotax,rotay,debug);
+testram(seed[128]);
+cmpram(seed[128]);
+criaseed(seed[128]);
+teste();
+teste1();
+teste2();
+teste3();
+teste4();
+teste5();
+teste6();
+teste7();
+teste8();
 
 ==========================
 PRINCIPAL:
-
 int main();
 
